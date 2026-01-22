@@ -175,18 +175,19 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- CONTENT FUNCTIONS ---
-def display_img(image_path_from_app, caption):
-    # App.py ki current location nikalna
+def display_img(relative_path, caption):
+    # App.py ki directory ka sahi path nikalna
     base_path = os.path.dirname(__file__)
     
-    # Ab yeh sahi path banayega bina double folder ke
-    full_path = os.path.join(base_path, image_path_from_app)
+    # Path ko join karna (assets/images/photo1.jpg)
+    # Dhyan dein: relative_path sirf "assets/images/photo1.jpg" hona chahiye
+    full_path = os.path.join(base_path, relative_path)
     
+    # Debugging ke liye: Agar file na mile toh log mein print hoga
     if os.path.exists(full_path):
         st.image(full_path, caption=caption, use_container_width=True)
     else:
-        # Debugging ke liye: Agar image na mile toh error dikhayega
-        st.error(f"File not found at: {full_path}")
+        st.warning(f"Note: Image not found at {full_path}. Check folder structure.")
 
 # --- 1. HERO ---
 st.markdown('''
