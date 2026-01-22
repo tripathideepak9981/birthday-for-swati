@@ -185,7 +185,7 @@ def display_img(relative_path, caption):
     
     # Debugging ke liye: Agar file na mile toh log mein print hoga
     if os.path.exists(full_path):
-        st.image(full_path, caption=caption, use_container_width=True)
+        st.image(full_path, caption=caption, use_column_width=True)
     else:
         st.warning(f"Note: Image not found at {full_path}. Check folder structure.")
 
