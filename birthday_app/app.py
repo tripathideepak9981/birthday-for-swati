@@ -175,15 +175,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- CONTENT FUNCTIONS ---
-def display_img(path, caption):
-    if os.path.exists(path):
-        st.image(path, caption=caption, use_container_width=True)
+def display_img(image_path_from_app, caption):
+    # App.py ki current location nikalna
+    base_path = os.path.dirname(__file__)
+    
+    # Ab yeh sahi path banayega bina double folder ke
+    full_path = os.path.join(base_path, image_path_from_app)
+    
+    if os.path.exists(full_path):
+        st.image(full_path, caption=caption, use_container_width=True)
     else:
-        st.markdown(f"""
-            <div style="height:250px; border:2px dashed rgba(255,255,255,0.2); border-radius:20px; display:flex; align-items:center; justify-content:center;">
-                <p style="color:rgba(255,255,255,0.4)">📷 Memory: {caption}</p>
-            </div>
-        """, unsafe_allow_html=True)
+        # Debugging ke liye: Agar image na mile toh error dikhayega
+        st.error(f"File not found at: {full_path}")
 
 # --- 1. HERO ---
 st.markdown('''
